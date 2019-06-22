@@ -19,7 +19,8 @@ public class IDValidator implements Validator {
         }
         int sum = 0;
         for (int i = 0; i < PRECEDING_LETTERS; i++) {
-            sum += (Integer.parseInt(String.valueOf(ID.charAt(i)), ALPHABET_SIZE) + 10) * WEIGHTS[i];
+            int letterValue = Integer.parseInt(String.valueOf(ID.charAt(i)), ALPHABET_SIZE);
+            sum += (letterValue + 10) * WEIGHTS[i];
         }
         for (int i = PRECEDING_LETTERS; i < ID_LENGTH; i++) {
             sum += Integer.parseInt(String.valueOf(ID.charAt(i))) * WEIGHTS[i];

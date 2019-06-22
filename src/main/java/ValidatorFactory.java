@@ -7,7 +7,7 @@ public class ValidatorFactory {
             case "PESEL":
                 return new PESELValidator();
             default:
-                throw new IllegalArgumentException();
+                return null;
         }
     }
 }
