@@ -1,36 +1,25 @@
 import picocli.CommandLine;
 
 public class Main implements Runnable {
-
-    @CommandLine.ArgGroup(exclusive = true, multiplicity = "1")
-    private Exclusive exclusive;
+    @CommandLine.Option(names = "-v", required = true)
+    private String validatorType;
+    @CommandLine.Option(names = "-id", required = true)
+    private String ID;
 
     public static void main(String[] args) {
         CommandLine.run(new Main(), args);
     }
 
     public void run() {
-        Validator validator = null;
-        String toValidate = "";
-        if (exclusive.ID != null) {
-            validator = new IDValidator();
-            toValidate = exclusive.ID;
+        Validator validator = ValidatorFactory.getValidator(validatorType.toUpperCase());
+        if (validator == null) {
+            System.out.println("Niepoprawny typ validatora");
+            return;
         }
-        if (exclusive.PESEL != null) {
-            validator = new PESELValidator();
-            toValidate = exclusive.PESEL;
-        }
-        if (validator.validate(toValidate)) {
+        if (validator.validate(ID)) {
             System.out.println("Ten numer jest poprawny");
         } else {
             System.out.println("Ten numer jest niepoprawny");
         }
-    }
-
-    static class Exclusive {
-        @CommandLine.Option(names = {"-p", "-pesel", "-PESEL"}, required = true)
-        String PESEL;
-        @CommandLine.Option(names = "-id", required = true)
-        String ID;
     }
 }
