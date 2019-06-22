@@ -33,6 +33,6 @@ public class PESELValidatorTest {
     @Test
     public void test_incorrect_PESEL() {
         String PESEL = "22060915918";
-        assertTrue(PESELValidator.validate(PESEL));
+        assertFalse(PESELValidator.validate(PESEL));
     }
 }
