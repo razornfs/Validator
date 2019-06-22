@@ -5,10 +5,7 @@ public class PESELValidator implements Validator {
     @Override
     public boolean validate(String PESEL) {
         PESEL = PESEL.trim();
-        if (PESEL.length() != 11) {
-            return false;
-        }
-        if (!PESEL.matches("[0-9]+")) {
+        if (!PESEL.matches("[0-9]{11}")) {
             return false;
         }
         int sum = 0;
@@ -17,6 +14,7 @@ public class PESELValidator implements Validator {
             int digit = Character.digit(PESEL.charAt(i), 10);
             sum += weight * digit;
         }
-        return sum % 10 == Character.digit(PESEL.charAt(PESEL.length() - 1), 10);
+        int lastDigit = Character.digit(PESEL.charAt(PESEL.length() - 1), 10);
+        return sum % 10 == lastDigit;
     }
 }
