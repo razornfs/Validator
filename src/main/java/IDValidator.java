@@ -5,6 +5,7 @@ public class IDValidator implements Validator {
     private static final int PRECEDING_LETTERS = 3;
     private static final int ALPHABET_SIZE = 26;
 
+    @Override
     public boolean validate(String ID) {
         ID = ID.trim();
         if (ID.length() != ID_LENGTH) {
