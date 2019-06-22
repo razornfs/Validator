@@ -36,5 +36,11 @@ public class IDValidatorTest {
         assertTrue(validator.validate(ID));
     }
 
+    @Test
+    public void test_incorrect_ID() {
+        String ID = "OLH281659";
+        assertFalse(validator.validate(ID));
+    }
+
 
 }
